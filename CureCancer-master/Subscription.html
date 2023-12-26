@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        body {
+            background: url(photos/subs.jpg);
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h4><a href="index.html" class="brand">CURE<span class="orange">CANCER</span></a></h4>
+        <div class="menu-btn">
+        </div>
+
+        <div class="navigation">
+            <div class="navigation-items">
+                <a href="donate.html">Donate</a>
+                <a href="about.html">About</a>
+                <a href="card.html">Patients</a>
+                <a href="askdonation.html">Ask For Donation</a>
+                <a href="login.html">Login/SignUp</a>
+            </div>
+        </div>
+    </header>
+    <div class="subscription" style="margin-top: 100px;">
+        <div class="row">
+        </div>
+    </div>
+    <script>
+        fetch("Subs.json")
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (subs) {
+                let data = document.querySelector(".row");
+                let out = "";
+                for (let sub of subs) {
+                    out += `
+<div class="subcard col-4">
+    <div class="subcards">
+        <h1 class="text-center">${sub.name}<br>Subscription</h1>
+    </div>
+    <div class="substable">
+        <p>${sub.duration}</p>
+        <p>${sub.gold} </p>
+        <p>${sub.appoint}</p>
+        <p>${sub.details}</p>
+        <p>${sub.amount}/${sub.time}</p>
+    </div>
+    <a href="donate.html" class="btn btn-primary" id="btns" style=" margin-left: 120px;">Subscribe</a>
+</div>
+    `
+                }
+                data.innerHTML = out
+            })
+    </script>
+</body>
+
+</html>
